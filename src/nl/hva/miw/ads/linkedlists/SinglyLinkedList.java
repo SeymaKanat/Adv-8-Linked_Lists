@@ -78,18 +78,6 @@ public class SinglyLinkedList {
             current.next = newNode;
         }
     }
-    public void printList() {
-        Node current = head;
-        int listSize = 0;
-        while (current != null) {
-            System.out.println(current.value + " ");
-            current = current.next;
-            listSize++;
-        }
-
-        System.out.println("SinglyLinkedList{size=" + listSize + "} ");
-        System.out.println();
-    }
 
     /**
      * Remove an elmeent from the list at position index, if it exists.

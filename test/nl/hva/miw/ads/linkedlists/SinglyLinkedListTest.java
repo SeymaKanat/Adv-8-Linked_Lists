@@ -10,6 +10,7 @@ public class SinglyLinkedListTest {
     @Test
     public void add() {
         SinglyLinkedList list = new SinglyLinkedList();
+        System.out.println("Initial List: " + list);
 
 
         list.add(0, 400);
@@ -21,9 +22,11 @@ public class SinglyLinkedListTest {
 
         String expected = "SinglyLinkedList{size=5} 100 200 300 400 500";
         String actual = list.toString();
+
+        System.out.println("Final List: " + actual);
+
         assertEquals(expected, actual);
 
-        list.printList();
     }
 
 
@@ -32,6 +35,8 @@ public class SinglyLinkedListTest {
     @Test
     public void remove() {
         SinglyLinkedList list = new SinglyLinkedList();
+        System.out.println("Initial List: " + list);
+
 
         list.add(0, 400);
         list.add(0, 100);
@@ -42,9 +47,10 @@ public class SinglyLinkedListTest {
         list.remove( 0 );
         String expected = "SinglyLinkedList{size=4} 200 300 400 500";
         String actual = list.toString();
-        assertEquals(expected, actual);
 
-        list.printList();
+        System.out.println("Final List: " + actual);
+
+        assertEquals(expected, actual);
 
     }
 

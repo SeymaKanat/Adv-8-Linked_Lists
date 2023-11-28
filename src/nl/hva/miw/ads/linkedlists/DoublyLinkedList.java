@@ -35,7 +35,18 @@ public class DoublyLinkedList {
      * @return
      */
     public int get( int index ) {
-        return -1;
+        // Check if index is valid (within list bounds)
+        if ( index < 0 || index >= size ) {
+            // Just return an insane number
+            return Integer.MIN_VALUE;
+        }
+        // Now follow the next-pointer as many times as necessary to get to the node at requested index.
+        Node current = head;
+        for ( int cnt=0; cnt < index; cnt++ ) {
+            current = current.next;
+        }
+        return current.value;
+
     }
 
     /**
@@ -45,13 +56,42 @@ public class DoublyLinkedList {
      * @param value
      */
     public void add( int index, int value ) {
+        // Check if index is valid (within list bounds, but could be one bigger (add a new element at the end of the list))
+        if ( index < 0 || index > size ) {
+            return;
+        }
         // Implement, create a new Node for this entry.
+        Node newNode = new Node( value );
+        size++;
 
-        Node n = new Node( value );
+        // The simple case is if we add a new head (index == 0)
+        if ( index == 0 ) {
+            if( head != null ) { //TODO:Bu if blogu singleda yok
+                head.prev = newNode;
+            }
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+        Node current = head;
+        for ( int cnt=0; cnt < index-1; cnt++ ) {
+            current = current.next;
+        }
 
-        // Implement the rest
+        // Now insert the new node after the current
+        newNode.next = current.next;
+        newNode.prev = current;//TODO:Buda singleda yok
+        // If there is a next node, then it should point back to this new node.
+        if ( newNode.next != null ) {//TODO:Bu if blogu singleda yok
+            newNode.next.prev = newNode;
+        }
+        current.next = newNode;
 
-    }
+        }
+
+
+
+
 
     /**
      * Remove an elmeent from the list at position index, if it exists.
@@ -59,8 +99,33 @@ public class DoublyLinkedList {
      * @param index
      */
     public void remove( int index ) {
-        // Implement, remove the corresponding node from the linked list.
+        // Check if index is valid (within list bounds)
+        if (index < 0 || index >= size) {
+            return;
+        }
+        // Decrease the size. Baglantinin boyutunu azaltir.
+        size--;
+
+        // Follow the next-pointer as many times as necessary to get to the node at requested index
+        Node current = head;
+        for ( int cnt=0; cnt < index - 1; cnt++ ) {
+            current = current.next;
+        }
+
+        // Now remove the node after the current node, by simply bypassing it.
+        if (current.prev != null) { // Removing the Node:
+            current.prev.next = current.next;
+        }
+
+        if (current.next != null) {// Removing the Node:
+            current.next.prev = current.prev;
+        }
+        // Check if we removed the head
+        if ( index == 0 ) { //Kaldırılan düğüm listenin başıysa (dizin 0'dır), başlığı bir sonraki düğüme günceller.
+            head = current.next;
+        }
     }
+
 
 
     @Override
