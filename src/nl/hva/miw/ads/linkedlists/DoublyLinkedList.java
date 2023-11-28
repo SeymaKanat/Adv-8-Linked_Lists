@@ -3,7 +3,7 @@ package nl.hva.miw.ads.linkedlists;
 /**
  * Doubly linked list.
  *
- * @author michel
+ * @author Seyma kanat
  */
 public class DoublyLinkedList {
 
